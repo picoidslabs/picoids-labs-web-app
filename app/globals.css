@@ -1,0 +1,262 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --labs-bg: #07070c;
+  --labs-bg-elevated: #0f0f16;
+  --labs-bg-card: #12121c;
+  --labs-fg: #f4f0e8;
+  --labs-muted: #9a958c;
+  --labs-subtle: #5c5850;
+  --labs-border: rgba(244, 240, 232, 0.1);
+  --labs-border-strong: rgba(244, 240, 232, 0.18);
+  --labs-accent: #e8a838;
+  --labs-accent-hot: #f06b3a;
+  --labs-accent-glow: rgba(232, 168, 56, 0.35);
+  --labs-cream: #f4f0e8;
+  --labs-ink: #07070c;
+
+  --font-display: var(--font-syne), system-ui, sans-serif;
+  --font-body: var(--font-outfit), system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .marquee-animate,
+  .marquee-animate-slow,
+  .float-slow,
+  .grain::after {
+    animation: none !important;
+  }
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--labs-bg);
+  color: var(--labs-fg);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: var(--labs-accent);
+  color: var(--labs-ink);
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .text-outline {
+    -webkit-text-stroke: 1px rgba(244, 240, 232, 0.35);
+    color: transparent;
+  }
+
+  .text-gradient-gold {
+    background: linear-gradient(
+      120deg,
+      var(--labs-accent) 0%,
+      #fff0d0 45%,
+      var(--labs-accent-hot) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+@layer components {
+  .container-labs {
+    @apply max-w-[88rem] mx-auto px-5 sm:px-8 lg:px-12;
+  }
+
+  .grain {
+    position: relative;
+  }
+
+  .grain::after {
+    content: "";
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .labs-mesh {
+    background:
+      radial-gradient(ellipse 80% 50% at 20% -10%, rgba(232, 168, 56, 0.15), transparent),
+      radial-gradient(ellipse 60% 40% at 90% 20%, rgba(240, 107, 58, 0.12), transparent),
+      radial-gradient(ellipse 50% 60% at 50% 100%, rgba(100, 80, 200, 0.08), transparent),
+      var(--labs-bg);
+  }
+
+  .btn-labs {
+    @apply inline-flex items-center justify-center gap-2 font-medium text-sm tracking-wide uppercase px-7 py-3.5 transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-labs-accent;
+    background: linear-gradient(135deg, var(--labs-accent) 0%, var(--labs-accent-hot) 100%);
+    color: var(--labs-ink);
+    border-radius: 9999px;
+    box-shadow: 0 0 40px var(--labs-accent-glow);
+  }
+
+  .btn-labs:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 56px var(--labs-accent-glow);
+  }
+
+  .btn-labs-ghost {
+    @apply inline-flex items-center justify-center gap-2 font-medium text-sm tracking-wide uppercase px-7 py-3.5 transition-all duration-300 rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-labs-accent;
+    border: 1px solid var(--labs-border-strong);
+    color: var(--labs-fg);
+    background: rgba(244, 240, 232, 0.03);
+  }
+
+  .btn-labs-ghost:hover {
+    border-color: var(--labs-accent);
+    color: var(--labs-accent);
+    background: rgba(232, 168, 56, 0.06);
+  }
+
+  .labs-card {
+    @apply relative overflow-hidden rounded-2xl border transition-all duration-500;
+    border-color: var(--labs-border);
+    background: linear-gradient(
+      145deg,
+      rgba(18, 18, 28, 0.95) 0%,
+      rgba(10, 10, 14, 0.98) 100%
+    );
+  }
+
+  .labs-card:hover {
+    border-color: rgba(232, 168, 56, 0.35);
+    transform: translateY(-4px);
+    box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.6);
+  }
+
+  .labs-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle at var(--mouse-x, 50%) var(--mouse-y, 0%),
+      rgba(232, 168, 56, 0.08),
+      transparent 55%
+    );
+    opacity: 0;
+    transition: opacity 0.4s;
+    pointer-events: none;
+  }
+
+  .labs-card:hover::before {
+    opacity: 1;
+  }
+
+  .labs-input {
+    @apply w-full px-4 py-3.5 text-base rounded-xl transition-colors duration-200;
+    background: rgba(244, 240, 232, 0.04);
+    border: 1px solid var(--labs-border);
+    color: var(--labs-fg);
+  }
+
+  .labs-input::placeholder {
+    color: var(--labs-subtle);
+  }
+
+  .labs-input:focus {
+    outline: none;
+    border-color: rgba(232, 168, 56, 0.5);
+    box-shadow: 0 0 0 3px rgba(232, 168, 56, 0.12);
+  }
+
+  .labs-select option {
+    background: var(--labs-bg-card);
+    color: var(--labs-fg);
+  }
+
+  .text-watermark {
+    color: rgba(244, 240, 232, 0.12);
+  }
+
+  .focus-labs:focus-visible {
+    outline: 2px solid var(--labs-accent);
+    outline-offset: 3px;
+  }
+
+  .labs-label {
+    @apply block text-xs font-medium uppercase tracking-[0.15em] mb-2;
+    color: var(--labs-muted);
+  }
+
+  .nav-glass {
+    @apply sticky top-0 z-40 border-b backdrop-blur-xl;
+    border-color: var(--labs-border);
+    background: rgba(7, 7, 12, 0.72);
+  }
+
+  .section-pad {
+    @apply py-20 md:py-28 lg:py-32;
+  }
+
+  .hero-display {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 11vw, 7.5rem);
+    font-weight: 800;
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+  }
+
+  .marquee-animate {
+    animation: marquee 32s linear infinite;
+  }
+
+  .marquee-animate-slow {
+    animation: marquee 48s linear infinite;
+  }
+
+  .float-slow {
+    animation: float 8s ease-in-out infinite;
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-12px);
+    }
+  }
+}
