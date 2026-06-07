@@ -4,7 +4,13 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import WhatsAppButton from "./components/WhatsAppButton";
-import { getSiteUrl } from "@/lib/site";
+import JsonLd from "./components/JsonLd";
+import {
+  localBusinessJsonLd,
+  organizationJsonLd,
+  rootMetadata,
+  webSiteJsonLd,
+} from "@/lib/seo";
 
 const syne = Syne({
   subsets: ["latin"],
@@ -18,30 +24,7 @@ const outfit = Outfit({
   weight: ["300", "400", "500", "600"],
 });
 
-const siteUrl = getSiteUrl();
-
-export const metadata: Metadata = {
-  metadataBase: new URL(`${siteUrl}/`),
-  title: {
-    default: "Picoids Labs — Web, Mobile & Digital for SMEs",
-    template: "%s | Picoids Labs",
-  },
-  description:
-    "Fixed, transparent pricing for micro and small businesses—websites, web applications, mobile apps, SEO, and digital marketing from Picoids Labs.",
-  authors: [{ name: "Picoids Technology and Consulting Pvt. Ltd." }],
-  openGraph: {
-    title: "Picoids Labs",
-    description:
-      "Web, mobile, SEO, and digital marketing for micro & small businesses—transparent fixed pricing.",
-    type: "website",
-    url: siteUrl,
-    siteName: "Picoids Labs",
-    locale: "en_US",
-  },
-  icons: {
-    icon: [{ url: "/favicon.svg", type: "image/svg+xml", sizes: "any" }],
-  },
-};
+export const metadata: Metadata = rootMetadata;
 
 export default function RootLayout({
   children,
@@ -49,8 +32,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${syne.variable} ${outfit.variable}`}>
+    <html lang="en-IN" className={`${syne.variable} ${outfit.variable}`}>
       <body className="font-body labs-mesh grain antialiased">
+        <JsonLd
+          data={[organizationJsonLd(), localBusinessJsonLd(), webSiteJsonLd()]}
+        />
         {children}
         <WhatsAppButton />
         <Analytics />

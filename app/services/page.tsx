@@ -1,19 +1,24 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import SiteHeader from "../components/SiteHeader";
 import Footer from "../components/Footer";
 import Marquee from "../components/Marquee";
 import ServiceGlyph from "../components/ServiceGlyph";
 import PricingDisclaimer from "../components/PricingDisclaimer";
+import JsonLd from "../components/JsonLd";
 import { formatPackagePrice } from "@/lib/currency";
 import { getPricingRegion } from "@/lib/get-pricing-region";
 import { labServices } from "@/lib/services";
+import { buildPageMetadata, webPageJsonLd } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Services & pricing",
-  description:
-    "Fixed-price website, mobile app, SEO, and digital marketing packages for micro and small businesses.",
-};
+const PAGE_TITLE = "Web, SEO & Digital Marketing Services in Bikaner";
+const PAGE_DESCRIPTION =
+  "Fixed-price website development, mobile apps, local SEO, and digital marketing packages for Bikaner shops, clinics, and small businesses.";
+
+export const metadata = buildPageMetadata({
+  title: PAGE_TITLE,
+  description: PAGE_DESCRIPTION,
+  path: "/services",
+});
 
 const marqueeItems = ["Web", "Web apps", "Mobile", "SEO", "Marketing", "Fixed pricing"];
 
@@ -22,6 +27,7 @@ export default async function ServicesPage() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <JsonLd data={webPageJsonLd("/services", PAGE_TITLE, PAGE_DESCRIPTION)} />
       <SiteHeader />
       <main className="flex-1">
         <section className="section-pad pb-12 md:pb-16">
@@ -32,7 +38,8 @@ export default async function ServicesPage() {
               <span className="text-outline">starter</span> pricing
             </h1>
             <p className="mt-8 text-xl text-labs-muted max-w-2xl leading-relaxed">
-              Transparent packages for SMEs. We tailor scope after a short call—no hidden fees.
+              Transparent packages for Bikaner SMEs and businesses across Rajasthan. We tailor scope
+              after a short call—no hidden fees.
             </p>
             <PricingDisclaimer region={region} className="mt-6 max-w-2xl" />
           </div>

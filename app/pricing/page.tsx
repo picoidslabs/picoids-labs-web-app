@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import SiteHeader from "../components/SiteHeader";
 import Footer from "../components/Footer";
@@ -8,16 +7,22 @@ import ProformaInvoiceCard from "../components/ProformaInvoice";
 import ShopifyVsCustom from "../components/ShopifyVsCustom";
 import WebAppStarterPackage from "../components/WebAppStarterPackage";
 import PricingDisclaimer from "../components/PricingDisclaimer";
+import JsonLd from "../components/JsonLd";
 import { formatPackagePrice, formatScaledInr, type PackagePriceKey } from "@/lib/currency";
 import { getPricingRegion } from "@/lib/get-pricing-region";
 import { labServices, SERVICE_PACKAGE_KEYS } from "@/lib/services";
 import { servicePricing, sumLineItems } from "@/lib/pricing";
+import { buildPageMetadata, webPageJsonLd } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Pricing",
-  description:
-    "Transparent base packages, add-ons, and example proforma invoices for website, web application, mobile, SEO, and digital marketing services.",
-};
+const PAGE_TITLE = "Transparent Pricing for Web & SEO in Bikaner";
+const PAGE_DESCRIPTION =
+  "See fixed base packages, add-ons, and example proforma invoices for website, web app, mobile, local SEO, and digital marketing—priced for Bikaner SMEs.";
+
+export const metadata = buildPageMetadata({
+  title: PAGE_TITLE,
+  description: PAGE_DESCRIPTION,
+  path: "/pricing",
+});
 
 const marqueeItems = [
   "Base + add-ons",
@@ -43,6 +48,7 @@ export default async function PricingPage() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <JsonLd data={webPageJsonLd("/pricing", PAGE_TITLE, PAGE_DESCRIPTION)} />
       <SiteHeader />
       <main className="flex-1">
         <section className="section-pad pb-12 md:pb-16">

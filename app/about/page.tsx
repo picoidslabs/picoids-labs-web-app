@@ -1,19 +1,25 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import SiteHeader from "../components/SiteHeader";
 import Footer from "../components/Footer";
 import Marquee from "../components/Marquee";
+import JsonLd from "../components/JsonLd";
 import { MAIN_SITE_URL } from "@/lib/site";
+import { buildPageMetadata, webPageJsonLd } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "About Picoids Labs",
-  description:
-    "Picoids Labs is the SME initiative from Picoids Technology and Consulting—training and digital services for small businesses worldwide.",
-};
+const PAGE_TITLE = "About Picoids Labs — Bikaner Digital Studio";
+const PAGE_DESCRIPTION =
+  "Picoids Labs is the SME arm of Picoids Technology and Consulting, based in Bikaner, Rajasthan—delivering websites, SEO, and digital training for local businesses.";
+
+export const metadata = buildPageMetadata({
+  title: PAGE_TITLE,
+  description: PAGE_DESCRIPTION,
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (
     <div className="min-h-screen flex flex-col">
+      <JsonLd data={webPageJsonLd("/about", PAGE_TITLE, PAGE_DESCRIPTION)} />
       <SiteHeader />
       <main className="flex-1">
         <section className="section-pad">

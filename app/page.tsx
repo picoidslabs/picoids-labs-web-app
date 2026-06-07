@@ -1,26 +1,31 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import SiteHeader from "./components/SiteHeader";
 import Footer from "./components/Footer";
 import Marquee from "./components/Marquee";
 import ServiceGlyph from "./components/ServiceGlyph";
 import PricingDisclaimer from "./components/PricingDisclaimer";
+import JsonLd from "./components/JsonLd";
 import { formatPackagePrice } from "@/lib/currency";
 import { getPricingRegion } from "@/lib/get-pricing-region";
 import { labServices } from "@/lib/services";
+import { buildPageMetadata, webPageJsonLd } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Web, Mobile & Digital for SMEs",
-  description:
-    "Picoids Labs helps micro and small businesses with websites, web applications, SEO, and digital marketing at fixed, transparent pricing.",
-};
+const PAGE_TITLE = "Web, Mobile & SEO for SMEs in Bikaner";
+const PAGE_DESCRIPTION =
+  "Bikaner-based digital studio for shops, clinics & growing brands—websites, web apps, mobile apps, local SEO, and digital marketing at fixed transparent pricing.";
+
+export const metadata = buildPageMetadata({
+  title: PAGE_TITLE,
+  description: PAGE_DESCRIPTION,
+  path: "/",
+});
 
 const marqueeItems = [
+  "Bikaner · Rajasthan",
   "Transparent pricing",
   "Web apps & mobile",
-  "SEO & ads",
+  "Local SEO",
   "Worldwide delivery",
-  "No enterprise fluff",
   "Picoids Labs",
 ];
 
@@ -33,7 +38,7 @@ const pillars = [
   {
     num: "02",
     title: "Built to ship",
-    body: "Practical delivery for local and international clients—remote collaboration, clear milestones.",
+    body: "Practical delivery for Bikaner businesses and international clients—remote collaboration, clear milestones.",
   },
   {
     num: "03",
@@ -49,6 +54,7 @@ export default async function HomePage() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <JsonLd data={webPageJsonLd("/", PAGE_TITLE, PAGE_DESCRIPTION)} />
       <SiteHeader />
 
       <main className="flex-1">
@@ -65,7 +71,7 @@ export default async function HomePage() {
 
           <div className="container-labs relative z-10">
             <p className="text-xs uppercase tracking-[0.35em] text-labs-accent mb-6 md:mb-8">
-              Picoids Labs · Digital studio
+              Picoids Labs · Bikaner, Rajasthan
             </p>
             <h1 className="hero-display max-w-[14ch]">
               <span className="block text-labs-fg">Digital</span>
@@ -75,9 +81,10 @@ export default async function HomePage() {
             </h1>
             <div className="mt-12 md:mt-16 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-end">
               <p className="lg:col-span-5 text-lg md:text-xl text-labs-muted leading-relaxed max-w-md">
-                Websites, web applications, SEO, and marketing with{" "}
+                Websites, web applications, local SEO, and digital marketing with{" "}
                 <span className="text-labs-fg font-medium">transparent fixed pricing</span>
-                —built for shops, clinics, and growing brands—not enterprise decks.
+                —for Bikaner businesses and clients worldwide. Built for shops, clinics, and
+                growing brands—not enterprise decks.
               </p>
               <div className="lg:hidden labs-card inline-flex flex-col p-4 w-fit">
                 <p className="text-[10px] uppercase tracking-[0.2em] text-labs-subtle mb-1">
@@ -186,7 +193,8 @@ export default async function HomePage() {
               Your next customer is already searching online
             </h2>
             <p className="text-labs-muted text-lg max-w-xl mx-auto mb-10">
-              Tell us what you sell—we will reply within one business day with a clear next step.
+              Whether you run a shop in Bikaner or sell across India—tell us what you do and we
+              will reply within one business day with a clear next step.
             </p>
             <Link href="/contact" className="btn-labs">
               Get a free quote

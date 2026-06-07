@@ -59,7 +59,7 @@ export const labServices: LabService[] = [
     name: "SEO & local search",
     tagline: "Found when it matters",
     description:
-      "Help customers find your business on Google—local listings and on-page optimization.",
+      "Help Bikaner customers find your business on Google—Google Business Profile, local listings, and on-page optimization.",
     fromPriceKey: "seo_monthly",
     fromPriceMonthly: true,
     highlights: [

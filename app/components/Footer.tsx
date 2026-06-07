@@ -84,9 +84,11 @@ export default function Footer() {
                 </a>
               </li>
               <li className="pt-2 leading-relaxed">
-                Hanuman street, Jailwell
-                <br />
-                Bikaner, Rajasthan 334001
+                <address className="not-italic">
+                  Hanuman street, Jailwell
+                  <br />
+                  Bikaner, Rajasthan 334001
+                </address>
               </li>
             </ul>
           </div>
