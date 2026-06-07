@@ -50,7 +50,8 @@ export default function Header({ currentRegionId }: HeaderProps) {
   }, [pathname]);
 
   return (
-    <header className="nav-glass relative z-50">
+    <>
+    <header className="nav-glass z-50">
       <div className="container-labs flex items-center justify-between h-[4.5rem]">
         <Link
           href="/"
@@ -130,8 +131,10 @@ export default function Header({ currentRegionId }: HeaderProps) {
         </button>
       </div>
 
+    </header>
+
       <div
-        className={`md:hidden fixed inset-0 top-[4.5rem] z-[60] bg-labs-bg/98 backdrop-blur-2xl transition-all duration-500 ${
+        className={`md:hidden fixed inset-0 top-[4.5rem] z-40 bg-labs-bg transition-all duration-500 ${
           isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
         }`}
       >
@@ -159,6 +162,6 @@ export default function Header({ currentRegionId }: HeaderProps) {
           </Link>
         </nav>
       </div>
-    </header>
+    </>
   );
 }

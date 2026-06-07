@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Syne, Outfit } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
+import WhatsAppButton from "./components/WhatsAppButton";
 import { getSiteUrl } from "@/lib/site";
 
 const syne = Syne({
@@ -47,7 +50,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${syne.variable} ${outfit.variable}`}>
-      <body className="font-body labs-mesh grain antialiased">{children}</body>
+      <body className="font-body labs-mesh grain antialiased">
+        {children}
+        <WhatsAppButton />
+        <Analytics />
+        <SpeedInsights />
+      </body>
     </html>
   );
 }

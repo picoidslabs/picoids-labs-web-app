@@ -15,3 +15,8 @@ export function absoluteUrl(path: string): string {
 }
 
 export const MAIN_SITE_URL = "https://picoids.com";
+
+/** E.164 digits only — used for tel: and WhatsApp links */
+export const LABS_PHONE_E164 = "918955225869";
+
+export const LABS_WHATSAPP_URL = `https://wa.me/${LABS_PHONE_E164}`;
